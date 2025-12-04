@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonder Map - Camino a las 7</title>
+    <link rel="icon" href="icon.jpeg" type="image/jpeg">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f8fb;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 10px;
+            background-color: #cfe8ff;
+            border-bottom: 3px solid #8ac4ff;
+        }
+
+        header img {
+            width: 120px;
+            border-radius: 10px;
+        }
+
+        header h1 {
+            margin: 10px 0 5px;
+            font-size: 2em;
+            color: #004b8d;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #0066cc;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .maravilla {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .maravilla:hover {
+            transform: scale(1.02);
+        }
+
+        .maravilla img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .maravilla h2 {
+            margin: 15px;
+            color: #004b8d;
+        }
+
+        .like-btn {
+            display: inline-block;
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #e63946;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .comments {
+            margin: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .comments input {
+            width: 70%;
+            padding: 8px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+
+        .comments button {
+            padding: 8px 12px;
+            background: #0077ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comments ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .comments li {
+            background: #f1f1f1;
+            padding: 6px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #cfe8ff;
+            color: #004b8d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="c:\Users\Silvermax\Desktop\DANI\dani imagenes\wonderMap logo.jpg" alt="Wonder Map logo">
+        <h1>WONDER MAP</h1>
+        <p>Camino a las 7 Maravillas del Mundo</p>
+    </header>
+
+    <main id="contenido"></main>
+
+    <footer>
+        © 2025 Wonder Map - Camino a las 7 🌎
+    </footer>
+
+    <script>
+        const maravillas = [
+            {nombre:"Gran Muralla China", img:"Gran Muralla China.jpg"},
+            {nombre:"Petra", img:"Petra.jpg"},
+            {nombre:"Coliseo Romano", img:"El Coliseo.jpg"},
+            {nombre:"Chichén Itzá", img:"Chichén Itzá.jpg"},
+            {nombre:"Machu Picchu", img:"Machu Picchu.jpg"},
+            {nombre:"Cristo Redentor", img:"Cristo Redentor.jpg"},
+            {nombre:"Taj Mahal", img:"Taj Mahal .jpg"}
+        ];
+
+        const contenedor = document.getElementById("contenido");
+
+        maravillas.forEach(m => {
+            const card = document.createElement("div");
+            card.className = "maravilla";
+            card.innerHTML = `
+                <img src="${m.img}" alt="${m.nombre}">
+                <h2>${m.nombre} <span class="like-btn">❤ 0</span></h2>
+                <div class="comments">
+                    <input type="text" placeholder="Escribe un comentario...">
+                    <button>Comentar</button>
+                    <ul></ul>
+                </div>
+            `;
+
+            // Sistema de likes
+            const likeBtn = card.querySelector(".like-btn");
+            let likes = 0;
+            likeBtn.addEventListener("click", () => {
+                likes++;
+                likeBtn.textContent = "❤ " + likes;
+            });
+
+            // Sistema de comentarios
+            const input = card.querySelector("input");
+            const btn = card.querySelector("button");
+            const list = card.querySelector("ul");
+
+            btn.addEventListener("click", () => {
+                if (input.value.trim() !== "") {
+                    const li = document.createElement("li");
+                    li.textContent = input.value;
+                    list.appendChild(li);
+                    input.value = "";
+                }
+            });
+
+            contenedor.appendChild(card);
+        });
+    </script>
+</body>
+</html>
